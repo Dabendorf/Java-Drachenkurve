@@ -18,7 +18,6 @@ public class Drachenkurve {
 		directions.add('o');
 		for(int i=0;i<gene;i++) {
 			nextGeneration();
-			System.out.println(directions);
 		}
 	}
 	
