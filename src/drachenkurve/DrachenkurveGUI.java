@@ -1,5 +1,6 @@
 package drachenkurve;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -22,6 +23,8 @@ public class DrachenkurveGUI {
 	private int linelength = 3;
 	/**Objekt der Drachenkurveklasse*/
 	private Drachenkurve k;
+	/**Floatwert fuer die HSV-Farbe*/
+	private float c = 0f, n = 0.002f;
 	/**JPanel, auf welchem die Kurve dargestellt wird*/
 	private JPanel painter = new JPanel() {
 		@Override
@@ -29,6 +32,7 @@ public class DrachenkurveGUI {
 			int x = frame1.getWidth()/2;
 			int y = 300;//frame1.getHeight()/2;
 			for(char c:k.getDirections()) {
+				g.setColor(getColor());
 				switch(c) {
 				case 'o':
 					g.drawLine(x, y, x-=linelength, y);
@@ -60,6 +64,18 @@ public class DrachenkurveGUI {
 		frame1.pack();
 		frame1.setLocationRelativeTo(null);
 		frame1.setVisible(true);
+	}
+	
+	/**
+	 * Diese Methode gibt die aktuelle Farbe zurueck.
+	 * @return Gibt Farbe aus.
+	 */
+	private Color getColor() {
+		if(c==(1-n)) {
+			c=-n;
+		}
+		Color color = new Color(Color.HSBtoRGB(c+=n,1f,1f));
+		return color;
 	}
 
 	public static void main(String[] args) {
